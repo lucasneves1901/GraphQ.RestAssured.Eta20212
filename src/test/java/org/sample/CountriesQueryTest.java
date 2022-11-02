@@ -4,8 +4,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class CountriesQueryTest extends baseTest {
 
@@ -24,6 +23,9 @@ public class CountriesQueryTest extends baseTest {
         response.then().body("data.country.phone", equalTo("55"));
         response.then().body("data.country.capital", equalTo("Brasília"));
         response.then().body("data.country.currency", equalTo("BRL"));
+        response.then().body("data.country.phone", instanceOf(String.class));
+        response.then().body("data.country.capital", instanceOf(String.class));
+        response.then().body("data.country.currency", instanceOf(String.class));
     }
 
     @Test
